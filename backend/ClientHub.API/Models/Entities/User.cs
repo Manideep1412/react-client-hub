@@ -1,0 +1,14 @@
+namespace ClientHub.API.Models.Entities;
+
+public class User
+{
+    public int      Id           { get; set; }
+    public string   Email        { get; set; } = "";
+    public string   PasswordHash { get; set; } = "";
+    public string   FullName     { get; set; } = "";
+    public string   Role         { get; set; } = "Agent";
+    public bool     IsOnline     { get; set; }
+    public DateTime CreatedAt    { get; set; } = DateTime.UtcNow;
+
+    public ICollection<Message> Messages { get; set; } = [];
+}
