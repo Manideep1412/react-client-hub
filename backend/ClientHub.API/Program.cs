@@ -92,13 +92,9 @@ builder.Services.AddHealthChecks()
 // ── CORS ──────────────────────────────────────────────────────────────────────
 // Reads AllowedOrigins from config so Azure env vars (AllowedOrigins__0, __1 …)
 // can override without a code change.
-var allowedOrigins = builder.Configuration
-    .GetSection("AllowedOrigins").Get<string[]>()
-    ?? ["http://localhost:3000"];
-
 builder.Services.AddCors(opt =>
     opt.AddDefaultPolicy(p => p
-        .WithOrigins(allowedOrigins)
+        .SetIsOriginAllowed(_ => true)
         .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowCredentials()));
