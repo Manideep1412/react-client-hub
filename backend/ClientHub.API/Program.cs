@@ -83,6 +83,9 @@ builder.Services.AddSwaggerGen(opt =>
             []
         }
     });
+
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    opt.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFile));
 });
 
 // ── Health Checks ─────────────────────────────────────────────────────────────
