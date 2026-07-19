@@ -37,3 +37,23 @@ Thumbs.db
 *.db
 *.db-shm
 *.db-wal
+
+# Test output
+frontend/coverage/
+backend/TestResults/
+backend/**/*.coverage
+backend/**/coverage.cobertura.xml
+backend/**/lcov.info
+
+# Secrets / local config
+appsettings.Development.json
+appsettings.Local.json
+*.pfx
+*.p12
+
+# TypeScript / Vite cache
+*.tsbuildinfo
+frontend/.vite/
+
+# Docker
+docker-compose.override.yml
