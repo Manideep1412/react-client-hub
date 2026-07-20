@@ -133,7 +133,7 @@ export default function ContactsPage() {
     <>
       <div className="flex flex-col h-full overflow-hidden">
         {/* Header */}
-        <div className="px-6 py-4 bg-white border-b border-gray-100 flex items-center justify-between flex-shrink-0">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 bg-white border-b border-gray-100 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
           <div>
             <h1 className="text-base font-semibold text-gray-900">Contacts</h1>
             <p className="text-xs text-gray-400 mt-0.5">{total} total contacts</p>
@@ -145,7 +145,7 @@ export default function ContactsPage() {
               </svg>
               <input
                 value={search} onChange={e => setSearch(e.target.value)}
-                placeholder="Search contacts..." className="input pl-8 py-1.5 text-xs w-56"
+                placeholder="Search contacts..." className="input pl-8 py-1.5 text-xs w-36 sm:w-56"
               />
             </div>
             <button
@@ -155,13 +155,14 @@ export default function ContactsPage() {
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
-              New Contact
+              <span className="hidden sm:inline">New Contact</span>
+              <span className="sm:hidden">New</span>
             </button>
           </div>
         </div>
 
         {/* Table */}
-        <div className="flex-1 overflow-auto px-6 py-4">
+        <div className="flex-1 overflow-auto px-4 sm:px-6 py-4">
           {loading ? (
             <div className="flex items-center justify-center py-16"><Spinner /></div>
           ) : contacts.length === 0 ? (
@@ -172,10 +173,10 @@ export default function ContactsPage() {
                 <thead>
                   <tr className="border-b border-gray-100 bg-gray-50/60">
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Name</th>
-                    <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Email</th>
-                    <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Company</th>
-                    <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Conversations</th>
-                    <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Joined</th>
+                    <th className="hidden sm:table-cell text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Email</th>
+                    <th className="hidden md:table-cell text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Company</th>
+                    <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Convs</th>
+                    <th className="hidden sm:table-cell text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Joined</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50">
@@ -187,12 +188,12 @@ export default function ContactsPage() {
                           <span className="font-medium text-gray-900">{c.name}</span>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-gray-500">{c.email}</td>
-                      <td className="px-4 py-3 text-gray-500">{c.company ?? '—'}</td>
+                      <td className="hidden sm:table-cell px-4 py-3 text-gray-500">{c.email}</td>
+                      <td className="hidden md:table-cell px-4 py-3 text-gray-500">{c.company ?? '—'}</td>
                       <td className="px-4 py-3">
                         <span className="badge bg-blue-50 text-blue-700 border border-blue-100">{c.conversationCount}</span>
                       </td>
-                      <td className="px-4 py-3 text-gray-400 text-xs font-mono">
+                      <td className="hidden sm:table-cell px-4 py-3 text-gray-400 text-xs font-mono">
                         {new Date(c.createdAt.endsWith('Z') ? c.createdAt : c.createdAt + 'Z').toLocaleDateString('en-CA')}
                       </td>
                     </tr>

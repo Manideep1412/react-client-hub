@@ -236,7 +236,7 @@ export default function ConversationList() {
 
   return (
     <>
-      <div className="w-72 h-full bg-white border-r border-gray-100 flex flex-col flex-shrink-0">
+      <div className={`${id ? 'hidden sm:flex' : 'flex'} w-full sm:w-72 h-full bg-white border-r border-gray-100 flex-col flex-shrink-0`}>
         {/* Header */}
         <div className="px-4 pt-4 pb-2 border-b border-gray-100">
           <div className="flex items-center justify-between mb-3">

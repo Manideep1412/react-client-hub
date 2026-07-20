@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getConversation, getMessages, sendMessage as sendMessageApi, updateConversationStatus } from '../../services/api';
 import { useChatStore } from '../../store/chatStore';
 import { chatHub } from '../../services/signalr';
@@ -12,6 +12,7 @@ import Spinner from '../ui/Spinner';
 
 export default function ChatWindow() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const convId = Number(id);
   const { messages, setMessages, markRead, appendMessage } = useChatStore();
   const [conv,       setConv]       = useState<Conversation | null>(null);
@@ -103,7 +104,16 @@ export default function ChatWindow() {
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="h-14 px-5 border-b border-gray-100 bg-white flex items-center gap-3 flex-shrink-0">
+      <div className="h-14 px-3 sm:px-5 border-b border-gray-100 bg-white flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <button
+          onClick={() => navigate('/inbox')}
+          className="sm:hidden p-1.5 -ml-1 rounded-lg hover:bg-gray-100 text-gray-500 transition-colors flex-shrink-0"
+          aria-label="Back to conversations"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
         <Avatar name={conv.contactName} size="sm" />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
